@@ -1,0 +1,143 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-1: #0f172a;
+    --bg-2: #111827;
+    --card: rgba(15, 23, 42, 0.72);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-2: #22c55e;
+    --danger: #fb7185;
+    --shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+}
+
+body {
+    min-height: 100vh;
+    padding: 24px;
+    font-family: Inter, Segoe UI, Arial, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.16), transparent 28%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form{
+    width: 100%;
+    max-width: 60%;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px white, 0 1px 0 white;
+    backdrop-filter: blur(8px);
+    padding: 10px 20px;
+}
+
+form h3{
+    text-align: center;
+}
+
+form .input-box{
+    width: 100%;
+    background: transparent;
+    font-weight: bold;
+    color: white;
+}
+
+form .input-box ul li{
+    list-style: none;
+    margin: 10px 0;
+}
+
+form .input-box ul li div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    width: 100%;
+    border: 1px solid var(--text);
+    border-radius: 10px;
+}
+
+form .input-box ul li div:focus-within{
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
+}
+
+form .input-box input{
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}
+
+form .input-box input::placeholder{
+    color: white;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+form .input-box input:focus{
+    outline: none;
+}
+
+form .lower{
+    text-align: center;
+}
+
+form .lower button{
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    background: transparent;
+    border-radius: 10px;
+    color: var(--text);
+    box-shadow: 0 1px 4px white, 0 1px 0 white;
+    cursor: pointer;
+}
+
+form .lower button:hover{
+    box-shadow: 0 -1px 4px white, 0 1px -1px white;
+    transform: scale(1.01);
+}
+
+form .lower p{
+    margin-top: 10px;
+}
+
+#check{
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+    color: orangered;
+}
+
+.message{
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.success{
+    background: #d4edda;
+    color: var(--accent-2);
+}
+
+.error{
+    background: #f8d7da;
+    color: var(--danger);
+}

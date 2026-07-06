@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/auth/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/boxicon/boxicons.min.css' %}">
+    <script src="{% static 'js/auth/auth.js' %}" defer></script>
+    <title>New Work</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <h3>LOGIN</h3>
+        <div class="input-box">
+            <ul>
+                <li>
+                    <div class="username">
+                        <i class="bx bx-user"></i>
+                        <input type="text" placeholder="username" name="username" required>
+                    </div>
+                </li>
+                <li>
+                    <div class="password">
+                        <i class="bx bx-lock"></i>
+                        <input type="password" placeholder="password" name="password" id="password" required>
+                        <i class="bx bx-hide" id="check" onclick="change()"></i>
+                    </div>
+                </li>
+            </ul>                  
+        </div>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message{{ messages.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="lower">
+            <button type="submit">Login</button>
+            <p>Don't have an account? <a href="{% url 'register' %}">register</a></p>
+            <a href="">forgot password</a>
+        </div>
+    </form>
+</body>
+</html>

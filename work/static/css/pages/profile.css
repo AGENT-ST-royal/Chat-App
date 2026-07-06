@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-1: #0f172a;
+    --bg-2: #111827;
+    --card: rgba(15, 23, 42, 0.72);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-2: #22c55e;
+    --danger: #fb7185;
+    --shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+}
+
+body {
+    min-height: 100vh;
+    max-width: 100%;
+    padding: 24px;
+    font-family: Inter, Segoe UI, Arial, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, var(--bg-1), transparent 50%),
+        radial-gradient(circle at top right, var(--bg-2), transparent 50%),
+        radial-gradient(circle at bottom right, var(--bg-1), transparent 50%),
+        radial-gradient(circle at bottom left, var(--bg-2), transparent 50%),
+        linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(34, 197, 94, 0.16));
+}
+
+.container a{
+    color: orangered;
+    text-decoration: none;
+}
+
+.container header a{
+    font-size: px;
+    margin: 20px;
+}
+.image{
+    height: 300px;
+    width: 300px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.image .profile-avatar{
+    max-height: 250px;
+    max-width: 250px;
+}

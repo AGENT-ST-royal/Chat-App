@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/pages/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/boxicon/boxicons.min.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h3><a href="{% url 'home' %}"><i class="bx bx-left-arrow-alt"></i></a>My Profile</h3>            
+        </header>
+        
+        <div class="image">
+            <img src="{{ request.user.profile.avatar.url }}" class="profile-avatar">
+        </div>
+        <h3>{{ request.user.username }}</h3>
+        <p>{{ request.user.email }}</p>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label>Profile Photo</label>
+            {{ form.avatar }}
+            <br><br>
+            <label>Bio</label>
+            {{ form.bio }}
+            <button type="submit">Save</button>
+        </form>
+        <a href="{% url 'login' %}"><i class="bx bxs-door-open">Logout</i></a>
+    </div>
+    
+</body>
+</html>
+

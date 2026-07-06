@@ -1,0 +1,94 @@
+const textarea = document.getElementById("message-input");
+const form = document.getElementById("message-form");
+const messages = document.querySelector(".messages");
+
+
+textarea.addEventListener("input", function(){
+    this.style.height= "auto";
+    this.style.height = Math.min(this.scrollHeight, 300) + "px";
+})
+
+console.log("JavaScript Loaded")
+
+const chatSocket = new WebSocket(
+    "ws://"+
+    window.location.host +
+    "/ws/chat/"+
+    conversationId +
+    "/"
+);
+
+chatSocket.onopen = function(e) {
+    console.log("Connected")
+};
+
+chatSocket.onmessage = function (e) {
+    const data = JSON.parse(e.data);
+    const isMe = data.sender === window.currentUser;
+    let html = "";
+
+    
+    if (isMe){
+        html = `
+        <div class="chat">
+            <div class="user">
+                <p>
+                    <strong>You<br></strong>${ data.message}
+                    <br>
+                    <small>${ data.created_at }</small>
+                </p>
+            </div>
+        </div>`;
+    } else {
+        html = `
+        <div class="chat">
+            <div class="other_user">
+                <p>
+                    <strong>${ data.sender } <br></strong>${ data.message }
+                    <br>
+                    <small>${ data.created_at }</small>
+                </p>
+            </div> 
+        </div>`;
+    }
+    messages.insertAdjacentHTML("beforeend", html.trim());
+    const lastMessage = messages.lastElementChild;
+    
+    lastMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "end"
+    })
+};
+
+chatSocket.onclose = function(e) {
+    console.log("closed")
+};
+
+chatSocket.onerror = function(e) {
+    console.log("error");
+    console.log(e);
+};
+
+form.addEventListener("submit", function(e){
+    e.preventDefault()
+
+    const message = textarea.value.trim();
+
+    if (message === "") return;
+    chatSocket.send(JSON.stringify({
+        message: message
+    }))
+    textarea.value = "";
+})
+
+
+
+window.addEventListener("load", function(){
+    const lastMessage = messages.lastElementChild;
+    if (lastMessage) {
+        lastMessage.scrollIntoView({
+            behavior: "instant",
+            block: "end"
+        });
+    }
+})

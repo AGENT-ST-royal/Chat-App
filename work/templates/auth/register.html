@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/auth/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/boxicon/boxicons.min.css' %}">
+    <script src="{% static 'js/auth/auth.js' %}" defer></script>
+    <title>New Work</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <h3>REGISTER</h3>
+        <div class="input-box">
+            <ul>
+                <li>
+                    <div class="username">
+                        <i class="bx bx-user"></i>
+                        <input type="text" placeholder="username" name="username" required>
+                    </div>
+                </li>
+                <li>
+                    <div class="email">
+                        <i class="bx bx-message"></i>
+                        <input type="email" placeholder="email" name="email" id="email" required>
+                    </div>
+                </li>
+                <li>
+                    <div class="password">
+                        <i class="bx bx-lock"></i>
+                        <input type="text" placeholder="password" name="password" id="password" required>
+                    </div>
+                </li>
+                <li>
+                    <div class="comfirm-password">
+                        <i class="bx bx-lock-open"></i>
+                        <input type="text" placeholder="comfirm password" name="comfirm_password" required>
+                    </div>
+                </li>
+            </ul>                  
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message{{ messages.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <div class="lower">
+            <button type="submit">Register</button>
+            <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        </div>
+    </form>
+</body>
+</html>
