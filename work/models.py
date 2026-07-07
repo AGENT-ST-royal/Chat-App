@@ -61,7 +61,6 @@ class Profile(models.Model):
 
     avatar = models.ImageField(
         upload_to="avatars/",
-        default="avatars/default.jpg"
     )
     bio = models.CharField(
         max_length=200,

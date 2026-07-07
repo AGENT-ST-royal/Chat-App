@@ -20,13 +20,10 @@ def home(request):
 
     search = request.GET.get("search", "")
 
-    users = []
+    users = User.objects.exclude(id=request.user.id)
+
     if search:
-        users = User.objects.filter(
-            username__icontains = search
-        ).exclude(
-            id=request.user.id
-        )
+        users = users.filter(username__icontains=search)
 
     chat_list = []
 
