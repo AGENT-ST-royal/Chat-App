@@ -31,7 +31,14 @@ body {
     justify-content: center;
 }
 
+@media (max-width: 360px) {
+    form{
+        width: 100%;
+    }
+}
+
 form{
+    width: 60%;
     border-radius: 10px;
     box-shadow: 0 1px 4px white, 0 1px 0 white;
     backdrop-filter: blur(8px);
