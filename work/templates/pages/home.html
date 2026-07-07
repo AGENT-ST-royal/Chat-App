@@ -13,7 +13,12 @@
     <div class="app">
     <header>
         <a class="profile" href="{% url 'profile' %}">
-            <img src="{{ request.user.profile.avatar.url }}" alt=""><h3>Welcome, {{ user.username }}</h3>
+            {% if user.profile.avatar %}
+                <img src="{{ user.profile.avatar.url }}">
+            {% else %}
+                <img src="{% static 'images/default.jpg' %}">
+            {% endif %}
+            <h3>Welcome, {{ user.username }}</h3>
         </a>
     </header>
 
