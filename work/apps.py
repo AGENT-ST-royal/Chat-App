@@ -4,5 +4,6 @@ from django.apps import AppConfig
 class WorkConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = 'work'
+
     def ready(self):
-        import work.signal
+        import work.signals

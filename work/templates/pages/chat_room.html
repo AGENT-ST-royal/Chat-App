@@ -8,16 +8,22 @@
     <link rel="stylesheet" href="{% static 'css/boxicon/boxicons.min.css' %}">
     <script>
         window.currentUser ="{{ request.user.username }}";
-        console.log(window.currentUser)
         const conversationId = "{{ conversation.id }}";
-        console.log("Conversation: ", conversationId)
     </script>
     <script src="{% static 'js/pages/newWork.js' %}" defer></script>
     <title>Document</title>
 </head>
 <body>
     <header>
-        <a href="{% url 'home' %}"><i class="bx bx-left-arrow-alt"></i></a><h2><img src="{{ other_user.profile.avatar.url }}" alt="">{{ other_user.username }}</h2>
+        <a href="{% url 'home' %}"><i class="bx bx-left-arrow-alt"></i></a>
+        <h2>
+            {% if other_user.profile.avatar %}
+                <img src="{{ other_user.profile.avatar.url }}" alt="">
+            {% else %}
+                <img src="{% static 'images/default.jpg' %}" alt="">
+            {% endif %}
+            {{ other_user.username }}
+        </h2>
     </header>
     <div class="container">
         <div class="messages">

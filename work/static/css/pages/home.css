@@ -58,8 +58,9 @@ header a{
     color: var(--text);
 }
 
-header a:hover{
-    color: orangered;
+header a h3:hover{
+    color: white;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
 }
 
 header h3{

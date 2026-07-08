@@ -62,6 +62,7 @@ class Profile(models.Model):
     avatar = models.ImageField(
         upload_to="avatars/",
     )
+
     bio = models.CharField(
         max_length=200,
         blank=True
@@ -74,3 +75,5 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
     
+
+

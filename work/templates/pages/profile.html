@@ -15,8 +15,13 @@
         </header>
         
         <div class="image">
-            <img src="{{ request.user.profile.avatar.url }}" class="profile-avatar">
+            {% if request.user.profile.avatar %}
+                <img src="{{ request.user.profile.avatar.url }}" class="profile-avatar">
+            {% else %}
+                <img src="{% static 'images/default.jpg' %}" class="profile-avatar">
+            {% endif %}
         </div>
+        
         <h3>{{ request.user.username }}</h3>
         <p>{{ request.user.email }}</p>
         <form method="POST" enctype="multipart/form-data">

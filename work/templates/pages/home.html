@@ -13,12 +13,12 @@
     <div class="app">
     <header>
         <a class="profile" href="{% url 'profile' %}">
-            {% if user.profile.avatar %}
-                <img src="{{ user.profile.avatar.url }}">
+            {% if request.user.profile.avatar %}
+                <img src="{{ request.user.profile.avatar.url }}" class="profile-avatar">
             {% else %}
-                <img src="{% static 'images/default.jpg' %}">
+                <img src="{% static 'images/default.jpg' %}" class="profile-avatar">
             {% endif %}
-            <h3>Welcome, {{ user.username }}</h3>
+            <h3>Welcome, {{ request.user.username }}</h3>
         </a>
     </header>
 
@@ -35,7 +35,11 @@
                 {% if users %}
                     <h3>Search Results</h3>
                     {% for user in users %}
-                        <a href="{% url 'start_chat' user.id %}"><img src="{{ user.profile.avatar.url }}"><strong>{{ user.username }}</strong></a>
+                        {% if user.profile.avatar %}
+                            <img src="{{ user.profile.avatar.url }}">
+                        {% else %}
+                            <img src="{% static 'images/default.jpg' %}">
+                        {% endif %}
                         <br>   
                     {% empty %}
                         <p>Name doesn't exist</p>             
@@ -51,7 +55,11 @@
                     <div class="chat-card">
                         <div class="chat-info">
                             <div class="sender-indicator">
-                                <img src="{{ chat.user.profile.avatar.url }}">
+                                {% if chat.user.profile.avatar %}
+                                    <img src="{{ chat.user.profile.avatar.url }}">
+                                {% else %}
+                                    <img src="{% static 'images/default.jpg' %}">
+                                {% endif %}
                                 <div class="name-text">
                                     <h5>{{ chat.user.username }}</h5>
                                     {% if chat.last_message %}
