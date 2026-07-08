@@ -104,14 +104,14 @@ header a:hover{
     background-color: rgba(84, 82, 82, 0.72);
     padding: 10px;
     border-radius: 10px;
-    margin-left: 50%;
+    margin-left: 30%;
 }
 
 .messages .chat .other_user{
     background-color: rgba(32, 32, 32, 0.72);
     padding: 10px;
     border-radius: 10px;
-    margin-right: 50%;
+    margin-right: 30%;
 }
 
 .messages .chat small{

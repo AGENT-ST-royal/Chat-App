@@ -32,20 +32,24 @@
                 <button type="submit" class="search-button"><i class="bx bx-search"></i></button>
             </form>
             <div class="result" id="search-results">
-                {% if users %}
-                    <h3>Search Results</h3>
-                    {% for user in users %}
-                        {% if user.profile.avatar %}
-                            <img src="{{ user.profile.avatar.url }}">
-                        {% else %}
-                            <img src="{% static 'images/default.jpg' %}">
-                        {% endif %}
-                        <br>   
+                {% for user in users %}
+                    <div class="user-result">
+                        <a href="{% url 'start_chat' user.id %}">
+                            {% if user.profile.avatar %}
+                                <img src="{{ user.profile.avatar.url }}">
+                            {% else %}
+                                <img src="{% static 'images/default.jpg' %}">
+                            {% endif %}
+
+                            <span>{{ user.username }}</span> 
+                        </a>
+
+                    </div>
+
                     {% empty %}
-                        <p>Name doesn't exist</p>             
+                    <p>No users found.</p>
+
                     {% endfor %}
-                
-                {% endif %}
             </div>
         </div>
 
