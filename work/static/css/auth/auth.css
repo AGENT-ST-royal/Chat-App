@@ -32,6 +32,10 @@ body {
 }
 
 @media (max-width: 360px) {
+    body{
+        padding: 0;
+    }
+
     form{
         width: 100%;
     }
