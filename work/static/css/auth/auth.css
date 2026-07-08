@@ -19,9 +19,9 @@
 
 body {
     min-height: 100vh;
-    padding: 24px;
     font-family: Inter, Segoe UI, Arial, sans-serif;
     color: var(--text);
+    padding: 20px;
     background:
         radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 32%),
         radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.16), transparent 28%),
@@ -31,18 +31,15 @@ body {
     justify-content: center;
 }
 
-@media (max-width: 360px) {
-    body{
-        padding: 0;
-    }
-
-    form{
-        width: 100%;
+@media (min-width: 768px) {
+    form {
+        width: 60%;
     }
 }
 
 form{
-    width: 60%;
+    max-width: 100%;
+    width: 400px;
     border-radius: 10px;
     box-shadow: 0 1px 4px white, 0 1px 0 white;
     backdrop-filter: blur(8px);
@@ -56,8 +53,8 @@ form h3{
 form .input-box{
     width: 100%;
     background: transparent;
-    font-weight: bold;
     color: white;
+    backdrop-filter: blur(8px);
 }
 
 form .input-box ul li{

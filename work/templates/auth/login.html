@@ -12,8 +12,8 @@
 <body>
     <form method="POST">
         {% csrf_token %}
-        <h3>LOGIN</h3>
         <div class="input-box">
+            <h3>LOGIN</h3>
             <ul>
                 <li>
                     <div class="username">
@@ -28,19 +28,18 @@
                         <i class="bx bx-hide" id="check" onclick="change()"></i>
                     </div>
                 </li>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message{{ messages.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                <div class="lower">
+                    <a href="">forgot password</a>
+                    <button type="submit">Login</button>
+                    <p>Don't have an account? <a href="{% url 'register' %}">register</a></p>
+                </div>
+                
             </ul>                  
-        </div>
-        
-        {% if messages %}
-            {% for message in messages %}
-                <div class="message{{ messages.tags }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-
-        <div class="lower">
-            <button type="submit">Login</button>
-            <p>Don't have an account? <a href="{% url 'register' %}">register</a></p>
-            <a href="">forgot password</a>
         </div>
     </form>
 </body>
