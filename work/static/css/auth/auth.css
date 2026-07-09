@@ -100,6 +100,12 @@ form .lower{
     text-align: center;
 }
 
+.forgot-password{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 10px;
+}
+
 form .lower button{
     margin-top: 20px;
     width: 100%;
@@ -129,7 +135,13 @@ form .lower p{
 
 a{
     text-decoration: none;
-    color: orangered;
+    color: rgb(13, 63, 200);
+    font-weight: bold;
+        
+}
+
+a:hover{
+    text-decoration: underline;
 }
 
 .message{
