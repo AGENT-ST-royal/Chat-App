@@ -177,8 +177,8 @@ if (searchInput) {
         searchBack.addEventListener("click", (e) => {
             e.preventDefault();
             if (searchInput) searchInput.value = "";
-            if (searchResults) searchResults.innerHTML = "";
-            setSearchMode(false);
+            if (searchResults)searchResults.innerHTML = "";
+            renderSearchHistory();
         });
     }
 }

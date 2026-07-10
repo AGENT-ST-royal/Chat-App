@@ -110,6 +110,14 @@ img{
     padding: 6px 10px;
     gap: 8px;
     box-shadow: inset 0 4px 12px rgba(0, 0, 0, .1);
+    transition:.25s ease;
+}
+
+.search form div:focus-within{
+    border:1px solid rgba(56,189,248,.45);
+    box-shadow:
+        0 0 0 3px rgba(56,189,248,.08),
+        inset 0 4px 12px rgba(0,0,0,.12);
 }
 
 .search form div a{
@@ -117,6 +125,7 @@ img{
     font-size: 18px;
     font-weight: bold;
     transition: .2s ease;
+    display: none;
 }
 
 .search form div a:hover{
@@ -165,11 +174,13 @@ img{
 }
 
 .result{
+    display: none;
+    width: 100%;
     padding: 8px;
-    margin: 8px 0;
+    margin-top: 10px;
     border-radius: 12px;
-    background: rgba(0,0,0,0.1);
-    box-shadow: inset 0 4px 12px rgba(0, 0, 0, .1);
+    background: rgba(0,0,0,.1);
+    box-shadow: inset 0 4px 12px rgba(0,0,0,.1);
 }
 
 .result a{
@@ -218,6 +229,7 @@ img{
 
 .messages{
     width: 100%;
+    display: block;
 }
 
 .messages a{
@@ -279,16 +291,44 @@ img{
     box-shadow: inset 0 0 2px rgb(255, 255, 255);
 }
 
-body.search-active .result {
-    display: block;
+body.search-active .messages{
+    display:none;
 }
 
-body.search-active .messages {
-    display: none;
+body.search-active .result{
+    display:block;
+    animation: fadeSearch .25s ease;
 }
 
-body.search-active .search form div a {
-    display: block;
+body.search-active .search form div a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+body.search-active .search-button{
+    display:none;
+}
+
+body.search-active .search form div{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+/* Smooth appearance */
+
+@keyframes fadeSearch{
+
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
 }
 
 /* Responsive */
