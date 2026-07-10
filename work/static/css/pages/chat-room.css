@@ -83,8 +83,7 @@ header a:hover{
     left: 0;
     right: 0;
     overflow: hidden;
-    padding: 10px 20px;
-    border: 2px solid rgba(255, 255, 255); 
+    padding: 10px 5px;
 }
 
 
@@ -93,8 +92,6 @@ header a:hover{
     overflow-y: auto;
     padding: 10px; 
     scrollbar-width: none;
-    border: 2px solid rgba(255, 255, 255);  
-
 }
 
 .messages .chat {
@@ -116,7 +113,6 @@ header a:hover{
     padding: 10px;
     border-radius: 10px;
     margin-left: 50%;
-    border: 2px solid rgba(255, 255, 255); 
 }
 
 .messages .chat .other_user{
