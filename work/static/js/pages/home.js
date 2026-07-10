@@ -58,16 +58,16 @@ const searchBack = document.getElementById("search-back");
 const searchHistoryKey = "chat_search_history";
 let searchTimer = null;
 
-if (searchInput) {
-    searchInput.value = "";
-    if (searchResults) {
-        searchResults.innerHTML = "";
-    }
-    // initial view is conversation mode (CSS handles visibility)
-    if (window.location.search.includes("search=")) {
-        window.history.replaceState(null, "", window.location.pathname);
-    }
-}
+// if (searchInput) {
+//     searchInput.value = "";
+//     if (searchResults) {
+//         searchResults.innerHTML = "";
+//     }
+//     // initial view is conversation mode (CSS handles visibility)
+//     if (window.location.search.includes("search=")) {
+//         window.history.replaceState(null, "", window.location.pathname);
+//     }
+// }
 
 const getSearchHistory = () => {
     try {
@@ -179,13 +179,18 @@ if (searchInput) {
 
 if (searchForm) {
     searchForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
         const query = searchInput.value.trim();
+
         if (!query) {
-            event.preventDefault();
+            searchResults.innerHTML = "";
             setSearchMode(false);
             return;
         }
+
         saveSearchQuery(query);
+        updateSearchResults(query);
     });
 }
 
