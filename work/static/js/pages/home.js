@@ -59,17 +59,6 @@ const searchBack = document.getElementById("search-back");
 const searchHistoryKey = "chat_search_history";
 let searchTimer = null;
 
-// if (searchInput) {
-//     searchInput.value = "";
-//     if (searchResults) {
-//         searchResults.innerHTML = "";
-//     }
-//     // initial view is conversation mode (CSS handles visibility)
-//     if (window.location.search.includes("search=")) {
-//         window.history.replaceState(null, "", window.location.pathname);
-//     }
-// }
-
 const getSearchHistory = () => {
     try {
         return JSON.parse(localStorage.getItem(searchHistoryKey) || "[]");
@@ -166,8 +155,7 @@ if (searchInput) {
             if (query) {
                 updateSearchResults(query);
             } else {
-                searchResults.innerHTML = "";
-                setSearchMode(false);
+                renderSearchHistory();
             }
         }, 200);
     });
@@ -176,9 +164,21 @@ if (searchInput) {
     if (searchBack) {
         searchBack.addEventListener("click", (e) => {
             e.preventDefault();
-            if (searchInput) searchInput.value = "";
-            if (searchResults)searchResults.innerHTML = "";
-            renderSearchHistory();
+
+            // Clear the search input
+            searchInput.value = "";
+
+            // Clear any displayed users/history
+            searchResults.innerHTML = "";
+
+            // Exit search mode
+            setSearchMode(false);
+
+            // Remove ?search=... from the URL
+            window.history.replaceState({}, "", window.location.pathname);
+
+            // Remove focus from the input
+            searchInput.blur();
         });
     }
 }

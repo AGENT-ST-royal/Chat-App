@@ -54,10 +54,6 @@ def home(request):
         key=lambda x: x["last_message"].created_at if x["last_message"] else x["conversation"].created_at, reverse=True
     )
 
-    print("SEARCH =", search)
-    print("FOUND USERS =", list(users.values_list("username", flat=True)))
-    print("CURRENT USER =", request.user.username)
-
     return render(request, "pages/home.html",{
         "chat_list": chat_list,
         "users": users,

@@ -230,6 +230,7 @@ img{
 
 .messages{
     width: 100%;
+    padding: 10px;
     display: block;
 }
 
