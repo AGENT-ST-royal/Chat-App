@@ -1,7 +1,8 @@
 console.log("active")
 
+const wsProtocol = window.location.protocol === "https:" ? "wss://" : "ws://";
 const homeSocket = new WebSocket(
-    "ws://" + window.location.host + "/ws/home/"
+    wsProtocol + window.location.host + "/ws/home/"
 );
 
 homeSocket.onopen = function(){

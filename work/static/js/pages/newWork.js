@@ -10,10 +10,11 @@ textarea.addEventListener("input", function(){
 
 console.log("JavaScript Loaded")
 
+const wsProtocol = window.location.protocol === "https:" ? "wss://" : "ws://";
 const chatSocket = new WebSocket(
-    "ws://"+
+    wsProtocol +
     window.location.host +
-    "/ws/chat/"+
+    "/ws/chat/" +
     conversationId +
     "/"
 );
