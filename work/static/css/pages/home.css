@@ -137,21 +137,6 @@ img{
     outline: none;
 }
 
-
-
-/* When the page is in search mode the back arrow shows and conversations hide */
-/* body.search-active .search form div a{
-    display: block;
-}
-
-body.search-active .result{
-    display: block;
-}
-
-body.search-active #conversation-list{
-    display: none;
-} */
-
 .search input::placeholder{
     color: var(--text);
 }
@@ -186,7 +171,6 @@ body.search-active #conversation-list{
     border-radius: 12px;
     background: rgba(0,0,0,0.1);
     box-shadow: inset 0 4px 12px rgba(0, 0, 0, .1);
-    display: none;
 }
 
 .result a{
@@ -294,6 +278,18 @@ body.search-active #conversation-list{
     font-size: 10px;
     font-weight: bold;
     box-shadow: inset 0 0 2px rgb(255, 255, 255);
+}
+
+body.search-active .result {
+    display: block;
+}
+
+body.search-active .messages {
+    display: none;
+}
+
+body.search-active .search form div a {
+    display: block;
 }
 
 /* Responsive */

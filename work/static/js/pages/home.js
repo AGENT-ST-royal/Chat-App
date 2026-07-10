@@ -131,8 +131,13 @@ const updateSearchResults = async (query) => {
     const doc = parser.parseFromString(html, "text/html");
     const newResult = doc.querySelector(".search .result");
 
+    console.log("Response HTML:", html);
+    console.log("Found result:", newResult);
+
     if (newResult) {
         searchResults.innerHTML = newResult.innerHTML;
+    } else {
+        console.error("Couldn't find .search .result");
     }
 };
 
