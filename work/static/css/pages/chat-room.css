@@ -84,37 +84,46 @@ header a:hover{
     right: 0;
     overflow: hidden;
     padding: 10px 20px;
+    border: 2px solid rgba(255, 255, 255); 
 }
 
 
 .messages{
     height: 100%;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 10px; 
-    scrollbar-width: none;   
+    padding: 10px; 
+    scrollbar-width: none;
+    border: 2px solid rgba(255, 255, 255);  
+
 }
 
 .messages .chat {
+    display: flex;
+    flex-direction: column;
     margin: 5px auto;
-    width: 100%;
+    height: fit-content;
+    width: auto;
+}
+
+.messages .chat p{
+    font-size: 14px;
+    color: var(--text);
+    word-wrap: break-word;
 }
 
 .messages .chat .user{
     background-color: rgba(84, 82, 82, 0.72);
     padding: 10px;
     border-radius: 10px;
-    margin-left: 30%;
-    max-width: fit-content;
+    margin-left: 50%;
+    border: 2px solid rgba(255, 255, 255); 
 }
 
 .messages .chat .other_user{
     background-color: rgba(32, 32, 32, 0.72);
     padding: 10px;
     border-radius: 10px;
-    margin-right: 30%;
-    max-width: fit-content;
+    margin-right: 50%;
 }
 
 .messages .chat small{
