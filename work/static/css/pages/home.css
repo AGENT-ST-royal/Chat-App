@@ -46,6 +46,7 @@ body {
 header{
     width: 100%;
     padding: 6px 4px;
+    color: black;
 }
 
 header a{
