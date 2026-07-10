@@ -87,7 +87,7 @@ img{
 }
 
 
-.search {
+/* .search {
     padding: 10px;
     width: 100%;
 }
@@ -291,9 +291,9 @@ body.search-active .messages {
 body.search-active .search form div a {
     display: block;
 }
-
+*/
 /* Responsive */
 @media (max-width: 880px){
     main{grid-template-columns: 1fr}
     .app{padding:12px}
-}
+} 
