@@ -1,3 +1,5 @@
+from urllib import request
+
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -51,6 +53,10 @@ def home(request):
     chat_list.sort(
         key=lambda x: x["last_message"].created_at if x["last_message"] else x["conversation"].created_at, reverse=True
     )
+
+    print("SEARCH =", search)
+    print("FOUND USERS =", list(users.values_list("username", flat=True)))
+    print("CURRENT USER =", request.user.username)
 
     return render(request, "pages/home.html",{
         "chat_list": chat_list,
