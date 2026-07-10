@@ -140,7 +140,7 @@ img{
 
 
 /* When the page is in search mode the back arrow shows and conversations hide */
-body.search-active .search form div a{
+/* body.search-active .search form div a{
     display: block;
 }
 
@@ -150,7 +150,7 @@ body.search-active .result{
 
 body.search-active #conversation-list{
     display: none;
-}
+} */
 
 .search input::placeholder{
     color: var(--text);
