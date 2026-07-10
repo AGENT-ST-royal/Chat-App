@@ -125,6 +125,7 @@ img{
     font-size: 18px;
     font-weight: bold;
     transition: .2s ease;
+    text-decoration: none;
     display: none;
 }
 
