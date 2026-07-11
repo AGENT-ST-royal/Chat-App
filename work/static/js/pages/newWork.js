@@ -8,6 +8,12 @@ textarea.addEventListener("input", function(){
     this.style.height = Math.min(this.scrollHeight, 300) + "px";
 })
 
+textarea.addEventListener("focus", () => {
+    setTimeout(() => {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }, 300);
+});
+
 console.log("JavaScript Loaded")
 
 const wsProtocol = window.location.protocol === "https:" ? "wss://" : "ws://";

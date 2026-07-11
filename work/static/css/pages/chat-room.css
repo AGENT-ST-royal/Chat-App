@@ -33,6 +33,12 @@ body {
     overflow: hidden;
 }
 
+.chat-room{
+    height:100dvh;
+    display:flex;
+    flex-direction:column;
+}
+
 header{
     position: sticky;
     position: fixed;
@@ -48,6 +54,7 @@ header{
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-shrink: 0;
 }
 
 header h2{
@@ -84,6 +91,7 @@ header a:hover{
     right: 0;
     overflow: hidden;
     padding: 10px 5px;
+    flex: 1;
 }
 
 
@@ -142,6 +150,7 @@ footer{
 footer form{
     display: flex;
     align-items: center;
+    flex-shrink: 0;
     gap: 5px;
     width: 100%;
 }
