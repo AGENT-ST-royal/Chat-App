@@ -21,6 +21,19 @@ homeSocket.onmessage = function(e){
     const data = JSON.parse(e.data)
     const message = document.getElementById(`last-message-${data.conversation_id}`);
     const time = document.getElementById(`time-${data.conversation_id}`);
+    console.log(data);
+
+    if (data.type === "presence_update") {
+        const status = document.getElementById(`status-${data.user_id}`);
+        if (status) {
+            if (data.is_online) {
+                status.textContent = "🟢 Online";
+            } else {
+                status.textContent = `⚫ Last seen ${data.last_seen}`;
+            }
+        }
+        return;
+    }
 
     if (message){
         message.innerHTML = `

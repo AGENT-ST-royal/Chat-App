@@ -53,24 +53,13 @@ class Message(models.Model):
         return f"{self.sender.username}: {self.text[:30]}"
     
 class Profile(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name="profile"
-    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    avatar = models.ImageField(
-        upload_to="avatars/",
-        blank=True,
-        null=True,
-    )
+    avatar = models.ImageField(upload_to="avatars/", blank=True, null=True)
 
-    bio = models.CharField(
-        max_length=200,
-        blank=True
-    )
+    bio = models.TextField(blank=True)
 
-    is_online= models.BooleanField(default=False)
+    is_online = models.BooleanField(default=False)
 
     last_seen = models.DateTimeField(auto_now=True)
 

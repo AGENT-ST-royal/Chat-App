@@ -65,6 +65,13 @@
                                     <img src="{% static 'images/default.jpg' %}">
                                 {% endif %}
                                 <div class="name-text">
+                                    <span id="status-{{ chat.other_user.id }}">
+                                        {% if chat.user.profile.is_online %}
+                                            🟢 Online
+                                        {% else %}
+                                            ⚫ Last seen {{ chat.user.profile.last_seen|date:"H:i" }}
+                                        {% endif %}
+                                    </span>
                                     <h5>{{ chat.user.username }}</h5>
                                     {% if chat.last_message %}
                                         <p id="last-message-{{ chat.conversation.id }}">
@@ -85,7 +92,7 @@
                             
                             <div class="chat-time">
                                 <small id="time-{{ chat.conversation.id }}">
-                                    {{ chat.last_message.created_at|date:"g:i A" }}
+                                    {{ chat.last_message.created_at|date:"H:i" }}
                                 </small>
                                 {% if chat.unread_count > 0 %}
                                     <span id="badge-{{ chat.conversation.id }}" class="unread-badge">
