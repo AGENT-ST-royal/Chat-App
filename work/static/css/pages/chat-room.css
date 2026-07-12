@@ -196,9 +196,14 @@ footer form button:hover i{
     color: orangered;
 }
 
+
 @media (width <= 600px){
     .container{        
         height: calc(header - footer);
         width: 100%;
+    }
+
+    footer.active{
+        margin-bottom: 35%;
     }
 }

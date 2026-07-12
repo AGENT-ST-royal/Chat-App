@@ -1,11 +1,16 @@
 const textarea = document.getElementById("message-input");
 const form = document.getElementById("message-form");
 const messages = document.querySelector(".messages");
+const footer = document.getElementById("footer");
 
 
 textarea.addEventListener("input", function(){
     this.style.height= "auto";
     this.style.height = Math.min(this.scrollHeight, 300) + "px";
+})
+
+textarea.addEventListener("click", () => {
+    footer.classList.toggle("active");
 })
 
 textarea.addEventListener("focus", () => {
