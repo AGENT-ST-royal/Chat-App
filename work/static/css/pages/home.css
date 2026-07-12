@@ -308,10 +308,6 @@ body.search-active .search form div a{
     justify-content:center;
 }
 
-body.search-active .search-button{
-    display:none;
-}
-
 body.search-active .search form div{
     background:rgba(255,255,255,.08);
     border:1px solid rgba(255,255,255,.08);

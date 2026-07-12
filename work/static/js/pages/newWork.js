@@ -9,13 +9,18 @@ textarea.addEventListener("input", function(){
     this.style.height = Math.min(this.scrollHeight, 300) + "px";
 })
 
-textarea.addEventListener("click", () => {
-    footer.classList.toggle("active");
-})
+textarea.addEventListener("focus", () => {
+    setTimeout(() => {
+        textarea.scrollIntoView({
+            block: "end",
+            behavior: "smooth"
+        });
+    }, 250);
+});
 
 textarea.addEventListener("focus", () => {
     setTimeout(() => {
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        messages.scrollTop = messages.scrollHeight;
     }, 300);
 });
 
