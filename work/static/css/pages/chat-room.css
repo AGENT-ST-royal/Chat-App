@@ -83,7 +83,7 @@ header a:hover{
     left: 0;
     right: 0;
     overflow: hidden;
-    padding: 10px 5px;
+    padding: 10px 5px;    
 }
 
 
@@ -194,4 +194,11 @@ footer form button i{
 
 footer form button:hover i{
     color: orangered;
+}
+
+@media (width <= 600px){
+    .container{        
+        height: calc(header - footer);
+        width: 100%;
+    }
 }
