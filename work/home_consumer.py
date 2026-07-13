@@ -44,7 +44,7 @@ class HomeConsumer(AsyncWebsocketConsumer):
                 "type": "presence_update",
                 "user_id": self.scope["user"].id,
                 "is_online": False,
-                "last_seen": timezone.localtime().strftime("%#I:%M %p"),
+                "last_seen": timezone.localtime().strftime("%I:%M %p").lstrip("0"),
             }
         )
 
@@ -70,15 +70,25 @@ class HomeConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def user_online(self):
         profile = self.scope["user"].profile
+
+        profile.active_connections += 1
         profile.is_online = True
-        profile.last_seen = timezone.now()
+
         profile.save()
 
     @database_sync_to_async
     def user_offline(self):
         profile = self.scope["user"].profile
-        profile.is_online = False
-        profile.last_seen = timezone.now()
+
+        profile.active_connections = max(
+            0,
+            profile.active_connections - 1
+        )
+
+        if profile.active_connections == 0:
+            profile.is_online = False
+            profile.last_seen = timezone.now()
+
         profile.save()
     
     async def presence_update(self, event):
@@ -88,3 +98,5 @@ class HomeConsumer(AsyncWebsocketConsumer):
             "is_online": event["is_online"],
             "last_seen": event.get("last_seen"),
         }))
+
+

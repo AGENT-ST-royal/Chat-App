@@ -57,9 +57,11 @@ class Profile(models.Model):
 
     avatar = models.ImageField(upload_to="avatars/", blank=True, null=True)
 
-    bio = models.TextField(blank=True)
+    bio = models.TextField(blank=True, max_length=200)
 
     is_online = models.BooleanField(default=False)
+
+    active_connections = models.PositiveIntegerField(default=0)
 
     last_seen = models.DateTimeField(auto_now=True)
 
