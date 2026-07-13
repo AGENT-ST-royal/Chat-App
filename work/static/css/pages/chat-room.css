@@ -136,7 +136,7 @@ header a:hover{
 }
 
 .messages .chat p{
-    word-break:break-word;
+    word-break: break-all;
     font-size:14px;
 }
 
@@ -284,3 +284,5 @@ footer button i{
     }
 
 }
+
+

@@ -12,17 +12,18 @@
 <body>
     <div class="app">
     <header>
-        <a class="profile" href="{% url 'profile' %}">
-            {% if request.user.profile.avatar %}
-                <img src="{{ request.user.profile.avatar.url }}" class="profile-avatar">
-            {% else %}
-                <img src="{% static 'images/default.jpg' %}" class="profile-avatar">
-            {% endif %}
-            <h3>Welcome, {{ request.user.username }}</h3>
-        </a>
-    </header>
+        <div class="header-container">
+            <div class="hearder-name">
+                {% if request.user.profile.avatar %}
+                    <img src="{{ request.user.profile.avatar.url }}" class="profile-avatar">
+                {% else %}
+                    <img src="{% static 'images/default.jpg' %}" class="profile-avatar">
+                {% endif %}
+                <h3>Welcome, {{ request.user.username }}</h3>
+            </div>
+            <a class="profile" href="{% url 'profile' %}"><i class="bx bx-dots-vertical-rounded"></i></a>
+        </div>
 
-    <main>
         <div class="search">
             <form method="GET" id="search-form">
                 <div>
@@ -52,7 +53,9 @@
                     {% endfor %}
             </div>
         </div>
+    </header>
 
+    <main>
         <div class="messages" id="conversation-list">
             {% for chat in chat_list %}
                 <a id="conversation-{{ chat.conversation.id }}" href="{% url 'chat_room' chat.conversation.id %}">
@@ -66,7 +69,7 @@
                                 {% endif %}
                                 <div class="name-text">
                                     <span id="status-{{ chat.other_user.id }}">
-                                        {% if chat.user.profile.is_online %}
+                                        {% if chat.user.profile.is_online == True %}
                                             🟢 Online
                                         {% else %}
                                             ⚫ Last seen {{ chat.user.profile.last_seen|date:"H:i" }}

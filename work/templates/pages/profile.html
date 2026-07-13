@@ -6,36 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/pages/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/boxicon/boxicons.min.css' %}">
-    <title>Document</title>
+    <title>Profile</title>
 </head>
 <body>
     <div class="container">
         <header>
-            <h3><a href="{% url 'home' %}"><i class="bx bx-left-arrow-alt"></i></a>My Profile</h3>            
+            <a href="{% url 'home' %}"><i class="bx bx-left-arrow-alt"></i></a>           
         </header>
         
-        <div class="image">
+        <div class="profile-info">
+            <h3>Profile</h3><br>
             {% if request.user.profile.avatar %}
                 <img src="{{ request.user.profile.avatar.url }}" class="profile-avatar">
             {% else %}
                 <img src="{% static 'images/default.jpg' %}" class="profile-avatar">
             {% endif %}
+            <h3>{{ request.user.username }}</h3>
+            <p>{{ request.user.email }}</p>
         </div>
         
-        <h3>{{ request.user.username }}</h3>
-        <p>{{ request.user.email }}</p>
+        
+        
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <label>Profile Photo</label>
-            {{ form.avatar }}
-            <br><br>
+            <label>Change Profile Photo</label>
+            {{ form.avatar }}<br>
+
             <label>Bio</label>
             {{ form.bio }}
             <button type="submit">Save</button>
         </form>
-        <a href="{% url 'login' %}"><i class="bx bxs-door-open">Logout</i></a>
-    </div>
-    
+        <footer>
+            <a href="{% url 'login' %}"><i class="bx bxs-door-open">Logout</i></a>
+        </footer>
+    </div>    
 </body>
 </html>
 
