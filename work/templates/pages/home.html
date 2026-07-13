@@ -68,8 +68,8 @@
                                     <img src="{% static 'images/default.jpg' %}">
                                 {% endif %}
                                 <div class="name-text">
-                                    <span id="status-{{ chat.other_user.id }}">
-                                        {% if chat.user.profile.is_online == True %}
+                                    <span id="status-{{ chat.user.id }}">
+                                        {% if chat.user.profile.is_online %}
                                             🟢 Online
                                         {% else %}
                                             ⚫ Last seen {{ chat.user.profile.last_seen|date:"H:i" }}
