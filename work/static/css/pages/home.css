@@ -119,7 +119,7 @@ header h3{
 
 .search form div a{
     color: var(--text);
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold;
     transition: .2s ease;
     text-decoration: none;
@@ -148,9 +148,7 @@ header h3{
 }
 
 .search-button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
     padding: 20px;
     border: none;
     border-radius: 50%;
@@ -314,6 +312,12 @@ body.search-active main{
     display:none;
 }
 
+body.search-active .search button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 body.search-active .result{
     display:block;
     animation: fadeSearch .25s ease;
@@ -346,8 +350,3 @@ body.search-active .search form div{
 
 }
 
-/* Responsive */
-@media (max-width <= 600px){
-    main{grid-template-columns: 1fr}
-    .app{padding:12px}
-} 
