@@ -84,7 +84,7 @@
                                                 <small>{{ chat.last_message.sender.username }}: </small>
                                             {% endif %}
                                         
-                                            {{ chat.last_message.text|truncatechars:35 }}
+                                            {{ chat.last_message.text|truncatechars:20 }}
                                         </p>
                                         
                                     {% else %}

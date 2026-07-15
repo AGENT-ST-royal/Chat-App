@@ -31,20 +31,16 @@
                 {% for message in messages %}
                     <div class="chat">
                         {% if message.sender == request.user %}
-                            <div class="user">
-                                <p>
-                                    <strong>You <br></strong>{{ message.text }}
-                                    <br>
-                                    <small>{{ message.created_at|date:"F j, Y g:i A" }}</small>
-                                </p>
+                            <div class="user">                            
+                                <strong>You <br></strong>
+                                <p class="message">{{ message.text }}</p>
+                                <small>{{ message.created_at|date:"H:i" }}</small>
                             </div>
                         {% else %}
                             <div class="other_user">
-                                <p>
-                                    <strong>{{ message.sender.username }} <br></strong>{{ message.text }}
-                                    <br>
-                                    <small>{{ message.created_at|date:"F j, Y g:i A" }}</small>
-                                </p>
+                                <strong>{{ message.sender.username }} <br></strong>
+                                <p class="message">{{ message.text }}</p>
+                                <small>{{ message.created_at|date:"H:i" }}</small>                                </p>
                             </div>                    
                         {% endif %}                
                     </div>

@@ -64,7 +64,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 "type": "chat_message",
                 "message": message.text,
                 "sender": self.scope["user"].username,
-                "created_at": local_time.strftime("%B %#d, %Y %#I:%M %p"),
+                "created_at": local_time.strftime("%H:%M"),
             }
         )
 
@@ -75,7 +75,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 "conversation_id": conversation.id,
                 "sender":self.scope["user"].username,
                 "message": message.text,
-                "created_at": local_time.strftime("%#I:%M %p"),
+                "created_at": local_time.strftime("%#I:%M"),
             }
         )
 

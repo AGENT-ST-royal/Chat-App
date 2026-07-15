@@ -49,22 +49,20 @@ chatSocket.onmessage = function (e) {
         html = `
         <div class="chat">
             <div class="user">
-                <p>
-                    <strong>You<br></strong>${ data.message}
-                    <br>
-                    <small>${ data.created_at }</small>
-                </p>
+                <strong>You<br></strong>
+                <p class="message">${ data.message}</p>
+                <br>
+                <small>${ data.created_at }</small>
             </div>
         </div>`;
     } else {
         html = `
         <div class="chat">
             <div class="other_user">
-                <p>
-                    <strong>${ data.sender } <br></strong>${ data.message }
-                    <br>
-                    <small>${ data.created_at }</small>
-                </p>
+                <strong>${ data.sender } <br></strong>
+                <p class="message">${ data.message}</p>
+                <br>
+                <small>${ data.created_at }</small>
             </div> 
         </div>`;
     }
