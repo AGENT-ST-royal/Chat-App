@@ -23,6 +23,13 @@ homeSocket.onmessage = function(e){
     const time = document.getElementById(`time-${data.conversation_id}`);
     console.log(data);
 
+    function truncateMessage(text, maxLength = 20) {
+        if (text.length <= maxLength) {
+            return text;
+        }
+        return text.substring(0, maxLength) + "...";
+    }
+    
     if (data.type === "presence_update") {
         const status = document.getElementById(`status-${data.user_id}`);
         if (status) {
@@ -38,7 +45,7 @@ homeSocket.onmessage = function(e){
     if (message){
         message.innerHTML = `
             <small>${data.sender}: </small>
-            ${data.message}
+            ${truncateMessage(data.message)}
         `;
     }
 

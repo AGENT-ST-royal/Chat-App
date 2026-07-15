@@ -44,7 +44,7 @@ class HomeConsumer(AsyncWebsocketConsumer):
                 "type": "presence_update",
                 "user_id": self.scope["user"].id,
                 "is_online": False,
-                "last_seen": timezone.localtime().strftime("%I:%M %p").lstrip("0"),
+                "last_seen": timezone.localtime().strftime("%H:%M"),
             }
         )
 
