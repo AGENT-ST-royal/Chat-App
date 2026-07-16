@@ -166,9 +166,6 @@ def profile(request):
         if form.is_valid():
             profile = form.save()
 
-            print("Avatar:", profile.avatar)
-            print("URL:", profile.avatar.url)
-
             return redirect("profile")
         else:
             print(form.errors)

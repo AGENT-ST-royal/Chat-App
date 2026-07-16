@@ -24,7 +24,6 @@ textarea.addEventListener("focus", () => {
     }, 300);
 });
 
-console.log("JavaScript Loaded")
 
 const wsProtocol = window.location.protocol === "https:" ? "wss://" : "ws://";
 const chatSocket = new WebSocket(

@@ -1,5 +1,3 @@
-console.log("active")
-
 const wsProtocol = window.location.protocol === "https:" ? "wss://" : "ws://";
 const homeSocket = new WebSocket(
     wsProtocol + window.location.host + "/ws/home/"
@@ -21,7 +19,6 @@ homeSocket.onmessage = function(e){
     const data = JSON.parse(e.data)
     const message = document.getElementById(`last-message-${data.conversation_id}`);
     const time = document.getElementById(`time-${data.conversation_id}`);
-    console.log(data);
 
     function truncateMessage(text, maxLength = 20) {
         if (text.length <= maxLength) {
@@ -139,9 +136,6 @@ const updateSearchResults = async (query) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
     const newResult = doc.querySelector(".search .result");
-
-    console.log("Response HTML:", html);
-    console.log("Found result:", newResult);
 
     if (newResult) {
         searchResults.innerHTML = newResult.innerHTML;

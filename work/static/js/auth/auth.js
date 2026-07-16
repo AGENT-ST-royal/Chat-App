@@ -1,5 +1,3 @@
-console.log("active")
-
 const password = document.getElementById("password");
 const check = document.getElementById("check");
 

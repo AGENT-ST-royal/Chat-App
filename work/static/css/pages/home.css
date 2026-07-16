@@ -250,7 +250,7 @@ main{
 .messages a{
     color: white;
     text-decoration: none;
-
+    font-size: 14px;
 }
 
 .chat-card{
