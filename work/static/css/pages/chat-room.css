@@ -160,6 +160,15 @@ header a:hover{
     color: #f4f4ef;
 }
 
+.typing-indicator{
+    height:20px;
+    padding-left:15px;
+    font-size:0.85rem;
+    color:#777;
+    font-style:italic;
+    transition:opacity .2s ease;
+}
+
 /* =======================
          FOOTER
 ======================= */
