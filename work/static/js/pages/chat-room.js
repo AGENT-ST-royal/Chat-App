@@ -4,6 +4,7 @@ const messages = document.querySelector(".messages");
 const footer = document.getElementById("footer");
 
 
+
 textarea.addEventListener("input", function(){
     this.style.height= "auto";
     this.style.height = Math.min(this.scrollHeight, 300) + "px";
@@ -40,39 +41,75 @@ chatSocket.onopen = function(e) {
 
 chatSocket.onmessage = function (e) {
     const data = JSON.parse(e.data);
-    const isMe = data.sender === window.currentUser;
-    let html = "";
+    if (data.type === "typing") {
+        console.log(data);
+
+        return;
+    }
+    // const isMe = data.sender === window.currentUser;
+    // let html = "";
 
     
-    if (isMe){
-        html = `
-        <div class="chat">
-            <div class="user">
-                <strong>You<br></strong>
-                <p class="message">${ data.message}</p>
-                <br>
-                <small>${ data.created_at }</small>
-            </div>
-        </div>`;
-    } else {
-        html = `
-        <div class="chat">
-            <div class="other_user">
-                <strong>${ data.sender } <br></strong>
-                <p class="message">${ data.message}</p>
-                <br>
-                <small>${ data.created_at }</small>
-            </div> 
-        </div>`;
-    }
-    messages.insertAdjacentHTML("beforeend", html.trim());
-    const lastMessage = messages.lastElementChild;
+    // if (isMe){
+    //     html = `
+    //     <div class="chat">
+    //         <div class="user">
+    //             <strong>You<br></strong>
+    //             <p class="message">${ data.message}</p>
+    //             <br>
+    //             <small>${ data.created_at }</small>
+    //         </div>
+    //     </div>`;
+    // } else {
+    //     html = `
+    //     <div class="chat">
+    //         <div class="other_user">
+    //             <strong>${ data.sender } <br></strong>
+    //             <p class="message">${ data.message}</p>
+    //             <br>
+    //             <small>${ data.created_at }</small>
+    //         </div> 
+    //     </div>`;
+    // }
+    // messages.insertAdjacentHTML("beforeend", html.trim());
+    // const lastMessage = messages.lastElementChild;
     
-    lastMessage.scrollIntoView({
-        behavior: "smooth",
-        block: "end"
-    })
+    // lastMessage.scrollIntoView({
+    //     behavior: "smooth",
+    //     block: "end"
+    // })    
 };
+
+let typingTimer;
+let isTyping = false;
+
+textarea.addEventListener("input", function(){
+
+    if(chatSocket.readyState === WebSocket.OPEN){
+
+        chatSocket.send(JSON.stringify({
+            type:"typing",
+            typing:true
+        }));
+
+    }
+
+    clearTimeout(typingTimer);
+
+    typingTimer = setTimeout(function(){
+
+    if(chatSocket.readyState === WebSocket.OPEN){
+
+        chatSocket.send(JSON.stringify({
+            type:"typing",
+            typing:false
+        }));
+
+    }
+
+    },1000);
+
+});
 
 chatSocket.onclose = function(e) {
     console.log("closed")
