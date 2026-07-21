@@ -348,3 +348,17 @@ body.search-active .search form div{
 
 }
 
+.typing-status{
+    height: 22px;
+    padding: 0 16px;
+    font-size: 13px;
+    font-style: italic;
+    color: rgba(32,32,32);
+    font-weight: bold;
+    opacity: 1;
+    transition: opacity .2s ease;
+}
+
+.typing-status .show{
+    opacity: 1;
+}

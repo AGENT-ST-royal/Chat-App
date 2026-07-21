@@ -99,4 +99,11 @@ class HomeConsumer(AsyncWebsocketConsumer):
             "last_seen": event.get("last_seen"),
         }))
 
+    async def home_typing(self, event):
+        await self.send(text_data=json.dumps({
+            "type": "typing",
+            "conversation_id": event["conversation_id"],
+            "sender": event["sender"],
+            "typing": event["typing"],
+        }))
 

@@ -39,47 +39,6 @@ chatSocket.onopen = function(e) {
     console.log("Connected")
 };
 
-chatSocket.onmessage = function (e) {
-    const data = JSON.parse(e.data);
-    if (data.type === "typing") {
-        console.log(data);
-
-        return;
-    }
-    // const isMe = data.sender === window.currentUser;
-    // let html = "";
-
-    
-    // if (isMe){
-    //     html = `
-    //     <div class="chat">
-    //         <div class="user">
-    //             <strong>You<br></strong>
-    //             <p class="message">${ data.message}</p>
-    //             <br>
-    //             <small>${ data.created_at }</small>
-    //         </div>
-    //     </div>`;
-    // } else {
-    //     html = `
-    //     <div class="chat">
-    //         <div class="other_user">
-    //             <strong>${ data.sender } <br></strong>
-    //             <p class="message">${ data.message}</p>
-    //             <br>
-    //             <small>${ data.created_at }</small>
-    //         </div> 
-    //     </div>`;
-    // }
-    // messages.insertAdjacentHTML("beforeend", html.trim());
-    // const lastMessage = messages.lastElementChild;
-    
-    // lastMessage.scrollIntoView({
-    //     behavior: "smooth",
-    //     block: "end"
-    // })    
-};
-
 let typingTimer;
 let isTyping = false;
 
@@ -110,6 +69,62 @@ textarea.addEventListener("input", function(){
     },1000);
 
 });
+
+chatSocket.onmessage = function (e) {
+    const data = JSON.parse(e.data);
+    const typingIndicator = document.getElementById("typing-indicator");
+    if (data.type === "typing") {
+        if (data.sender === window.currentUser){
+            return;
+        }  
+
+        if (data.typing){
+            typingIndicator.textContent = `${data.sender} is typing...`;
+            typingIndicator.classList.add("show");
+        } else {
+            typingIndicator.textContent = "";
+            typingIndicator.classList.remove("show");
+        }
+
+        return;
+    }
+    
+
+    const isMe = data.sender === window.currentUser;
+    let html = "";
+
+    
+    if (isMe){
+        html = `
+        <div class="chat">
+            <div class="user">
+                <strong>You<br></strong>
+                <p class="message">${ data.message}</p>
+                <br>
+                <small>${ data.created_at }</small>
+            </div>
+        </div>`;
+    } else {
+        html = `
+        <div class="chat">
+            <div class="other_user">
+                <strong>${ data.sender } <br></strong>
+                <p class="message">${ data.message}</p>
+                <br>
+                <small>${ data.created_at }</small>
+            </div> 
+        </div>`;
+    }
+    messages.insertAdjacentHTML("beforeend", html.trim());
+    const lastMessage = messages.lastElementChild;
+    
+    lastMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "end"
+    })    
+};
+
+
 
 chatSocket.onclose = function(e) {
     console.log("closed")

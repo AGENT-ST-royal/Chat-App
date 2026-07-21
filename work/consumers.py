@@ -96,6 +96,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
             }
         )
 
+        await self.channel_layer.group_send(
+            f"home_{receiver.id}",
+            {
+                "type": "home_typing",
+                "conversation_id": conversation.id,
+                "sender": self.scope["user"].username,
+                "typing": data["typing"]
+            }
+        )
+
     async def chat_message(self, event):
         await self.send(text_data=json.dumps({
             "message":event["message"],

@@ -19,6 +19,19 @@ homeSocket.onmessage = function(e){
     const data = JSON.parse(e.data)
     const message = document.getElementById(`last-message-${data.conversation_id}`);
     const time = document.getElementById(`time-${data.conversation_id}`);
+    const typing = document.getElementById(`typing-${data.conversation_id}`);
+    if (data.type === "typing") {
+        if(typing){
+            if (data.typing){
+                typing.textContent = `${data.sender} is typing...`;
+                typing.classList.add("show");
+            } else {
+                typing.textContent = "";
+                typing.classList.remove("show");
+            }
+        }  
+        return;
+    }
 
     function truncateMessage(text, maxLength = 20) {
         if (text.length <= maxLength) {
