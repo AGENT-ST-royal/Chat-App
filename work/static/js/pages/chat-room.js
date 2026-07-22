@@ -79,10 +79,8 @@ chatSocket.onmessage = function (e) {
         }  
 
         if (data.typing){
-            typingIndicator.textContent = `${data.sender} is typing...`;
             typingIndicator.classList.add("show");
         } else {
-            typingIndicator.textContent = "";
             typingIndicator.classList.remove("show");
         }
 

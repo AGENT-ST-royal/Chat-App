@@ -161,18 +161,57 @@ header a:hover{
 }
 
 .typing-indicator{
-    height: 22px;
+    display: flex;
+    align-items: center;
     padding: 0 16px;
-    font-size: 13px;
-    font-style: italic;
-    color: rgba(32,32,32);
-    font-weight: bold;
-    opacity: 1;
+    display: none;
     transition: opacity .2s ease;
+    margin-bottom: 10px;
+    gap: 2.5px;
 }
 
-.typing-indicator .show{
-    opacity: 1;
+.typing-indicator.show{
+    display: flex;
+}
+
+.typing-indicator span{
+    background: rgb(244, 143, 49);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.typing-indicator .bounce1{
+    animation: bounce .5s linear infinite;
+    transition: ease;
+}
+
+@keyframes bounce{
+    25%{
+        transform: translateY(-5px);
+    }
+}
+
+.typing-indicator .bounce2{
+    animation: bounce2 .5s linear infinite;
+    transition: ease;
+}
+
+@keyframes bounce2{
+    50%{
+        transform: translateY(-5px);
+    }
+}
+
+.typing-indicator .bounce3{
+    animation: bounce3 .5s linear infinite;
+    transition: ease;
+}
+
+@keyframes bounce3{
+    75%{
+        transform: translateY(-5px);
+    }
 }
 
 /* =======================
@@ -223,7 +262,7 @@ footer textarea{
 
     color:white;
 
-    background:rgba(84,82,82,.95);
+    background: rgba(84,82,82,.95);
 }
 
 footer textarea::-webkit-scrollbar{
