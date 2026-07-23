@@ -83,8 +83,18 @@
                                             {% else %}
                                                 <small>{{ chat.last_message.sender.username }}: </small>
                                             {% endif %}
-                                        
+
                                             {{ chat.last_message.text|truncatechars:20 }}
+
+                                                {% if chat.unread_count > 0 %}
+                                                    <span class="unread-tick">
+                                                        ✓✓
+                                                    </span> 
+                                                {% else %}
+                                                    <span class="read-tick" style="color: blue;">
+                                                        ✔✔
+                                                    </span>
+                                                {% endif %}                                       
                                         </p>
                                         
                                     {% else %}
@@ -103,7 +113,7 @@
                                     </span> 
                                 {% else %}
                                     <span id="badge-{{ chat.conversation.id }}" class="unread-badge" style="display: none;">
-                                        0
+                                        
                                     </span>
                                 {% endif %}
                             </div>
