@@ -44,14 +44,36 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         data = json.loads(text_data)
+
         message_type = data.get("type")
 
+        # Get the conversation first
+        conversation = await self.get_conversation(self.conversation_id)
+
+        # Handle typing events
         if message_type == "typing":
 
+            receiver = await self.get_receiver(
+                conversation,
+                self.scope["user"]
+            )
+
+            # Send to the open chat
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
-                    "type":"typing_status",
+                    "type": "typing_status",
+                    "sender": self.scope["user"].username,
+                    "typing": data["typing"],
+                }
+            )
+
+            # Send to the receiver's home page
+            await self.channel_layer.group_send(
+                f"home_{receiver.id}",
+                {
+                    "type": "home_typing",
+                    "conversation_id": conversation.id,
                     "sender": self.scope["user"].username,
                     "typing": data["typing"],
                 }
@@ -59,51 +81,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
             return
 
+        # Normal message handling
         text = data["message"]
-        conversation = await self.get_conversation(self.conversation_id)
-        
+
         message = await self.save_message(
             conversation,
             self.scope["user"],
             text
-        )
-        
-        receiver = await self.get_receiver(
-            conversation,
-            self.scope["user"]
-        )
-
-        local_time = timezone.localtime(message.created_at)
-
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                "type": "chat_message",
-                "message": message.text,
-                "sender": self.scope["user"].username,
-                "created_at": local_time.strftime("%H:%M"),
-            }
-        )
-
-        await self.channel_layer.group_send(
-            f"home_{receiver.id}",
-            {
-                "type": "home_update",
-                "conversation_id": conversation.id,
-                "sender":self.scope["user"].username,
-                "message": message.text,
-                "created_at": local_time.strftime("%H:%M"),
-            }
-        )
-
-        await self.channel_layer.group_send(
-            f"home_{receiver.id}",
-            {
-                "type": "home_typing",
-                "conversation_id": conversation.id,
-                "sender": self.scope["user"].username,
-                "typing": data["typing"]
-            }
         )
 
     async def chat_message(self, event):

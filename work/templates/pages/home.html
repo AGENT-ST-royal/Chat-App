@@ -96,7 +96,7 @@
                                                     </span>
                                                 {% endif %}                                       
                                         </p>
-                                        
+                                        <p id="typing-{{chat.conversation.id}}" class="typing-status" style="display: none;"></p>
                                     {% else %}
                                         <p>No messages yet.</p>
                                 {% endif %}
@@ -116,8 +116,7 @@
                                         
                                     </span>
                                 {% endif %}
-                            </div>
-                            <p id="typing-{{chat.conversation.id}}" class="typing-status"></p>                                                 
+                            </div>                                                 
                         </div>    
                     </div>
                 </a>

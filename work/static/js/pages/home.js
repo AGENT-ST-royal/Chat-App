@@ -23,9 +23,13 @@ homeSocket.onmessage = function(e){
     if (data.type === "typing") {
         if(typing){
             if (data.typing){
-                typing.textContent = `${data.sender} is typing...`;
+                typing.textContent = `typing...`;
                 typing.classList.add("show");
+                typing.style.display = "block";
+                message.style.display = "none";
             } else {
+                message.style.display = 'block';
+                typing.style.display = "none";
                 typing.textContent = "";
                 typing.classList.remove("show");
             }
