@@ -355,3 +355,7 @@ body.search-active .search form div{
     opacity: 1;
     transition: .1s ease;
 }
+
+.read-tick{
+    font-size: 10px;
+}

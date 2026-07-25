@@ -87,11 +87,11 @@
                                             {{ chat.last_message.text|truncatechars:20 }}
 
                                                 {% if chat.unread_count > 0 %}
-                                                    <span class="unread-tick">
+                                                    <span class="read-tick">
                                                         ✓✓
                                                     </span> 
                                                 {% else %}
-                                                    <span class="read-tick" style="color: blue;">
+                                                    <span class="read-tick" style="color: blue;" >
                                                         ✔✔
                                                     </span>
                                                 {% endif %}                                       
