@@ -150,15 +150,6 @@ def chat_room(request, conversation_id):
     other_user = conversation.participants.exclude(
         id= request.user.id
     ).first()
-
-    Message.objects.filter(
-        conversation = conversation,
-        is_read =False
-    ).exclude(
-        sender = request.user
-    ).update(
-        is_read=True
-    )
   
     messages = Message.objects.filter(
         conversation=conversation

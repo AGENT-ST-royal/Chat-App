@@ -356,6 +356,6 @@ body.search-active .search form div{
     transition: .1s ease;
 }
 
-.read-tick{
-    font-size: 10px;
+.read-tick[data-status="read"] {
+    color: #34b7f1;
 }

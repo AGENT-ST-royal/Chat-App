@@ -214,6 +214,17 @@ header a:hover{
     }
 }
 
+.messages .chat .message-time {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+}
+
+.messages .chat .message-time .message-receipt {
+    display: inline !important;
+    margin-left: 4px !important;
+}
+
 /* =======================
          FOOTER
 ======================= */

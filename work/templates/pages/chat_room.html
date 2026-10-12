@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="{% static 'css/pages/chat-room.css' %}">
     <link rel="stylesheet" href="{% static 'css/boxicon/boxicons.min.css' %}">
     <script>
-        window.currentUser ="{{ request.user.username }}";
+        window.currentUser = "{{ request.user.username }}";
+        window.currentUserId = "{{ request.user.id }}";
         const conversationId = "{{ conversation.id }}";
     </script>
     <script src="{% static 'js/pages/chat-room.js' %}" defer></script>
@@ -26,26 +27,36 @@
                 {{ other_user.username }}
             </h2>
         </header>
+
         <div class="container">
             <div class="messages">
                 {% for message in messages %}
                     <div class="chat">
                         {% if message.sender == request.user %}
-                            <div class="user">                            
+                            <div class="user">
                                 <strong>You <br></strong>
                                 <p class="message">{{ message.text }}</p>
-                                <small>{{ message.created_at|date:"H:i" }}</small>
+                                <small class="message-time">
+                                    {{ message.created_at|date:"H:i" }}
+                                    <small
+                                        class="message-receipt"
+                                        data-receipt-for="{{ message.id }}"
+                                        data-status="{% if message.is_read %}read{% elif message.delivered_at %}delivered{% else %}sent{% endif %}"
+                                        title="{% if message.is_read %}Read{% elif message.delivered_at %}Delivered{% else %}Sent{% endif %}"
+                                    >{% if message.is_read or message.delivered_at %}✓✓{% else %}✓{% endif %}</small>
+                                </small>
+                                
                             </div>
                         {% else %}
                             <div class="other_user">
                                 <strong>{{ message.sender.username }} <br></strong>
                                 <p class="message">{{ message.text }}</p>
-                                <small>{{ message.created_at|date:"H:i" }}</small>                                </p>
-                            </div>                    
-                        {% endif %}                
+                                <small>{{ message.created_at|date:"H:i" }}</small>
+                            </div>
+                        {% endif %}
                     </div>
-                    {% empty %}
-                        <p>No messages yet.</p>
+                {% empty %}
+                    <p>No messages yet.</p>
                 {% endfor %}
             </div>
         </div>
@@ -55,7 +66,7 @@
             <span class="bounce2"></span>
             <span class="bounce3"></span>
         </div>
-        
+
         <footer id="footer">
             <form id="message-form">
                 {% csrf_token %}

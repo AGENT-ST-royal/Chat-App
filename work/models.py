@@ -32,22 +32,21 @@ class Conversation(models.Model):
 class Message(models.Model):
     conversation = models.ForeignKey(
         Conversation,
-        on_delete= models.CASCADE,
-        related_name= "messages",
+        on_delete=models.CASCADE,
+        related_name="messages",
     )
 
     sender = models.ForeignKey(
         User,
-        on_delete= models.CASCADE
+        on_delete=models.CASCADE
     )
 
     text = models.TextField(blank=True)
-
-    created_at = models.DateTimeField(auto_now_add= True)
-
+    created_at = models.DateTimeField(auto_now_add=True)
     edited = models.BooleanField(default=False)
-
     is_read = models.BooleanField(default=False)
+    delivered_at = models.DateTimeField(null=True, blank=True)
+    read_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.sender.username}: {self.text[:30]}"
