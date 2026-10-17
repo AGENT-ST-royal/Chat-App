@@ -69,7 +69,7 @@
                                     <div class="name-text">
                                         <span id="status-{{ chat.user.id }}">
                                             {% if chat.user.profile.is_online %}
-                                                🟢 Online
+                                                🟢 Active
                                             {% else %}
                                                 ⚫ Last seen {{ chat.user.profile.last_seen|date:"H:i" }}
                                             {% endif %}

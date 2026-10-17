@@ -65,7 +65,7 @@ homeSocket.onmessage = function (e) {
         const status = document.getElementById(`status-${data.user_id}`);
         if (status) {
             status.textContent = data.is_online
-                ? "🟢 Online"
+                ? "🟢 Active"
                 : `⚫ Last seen ${data.last_seen}`;
         }
         return;
