@@ -1,3 +1,4 @@
+
 """
 Django settings for newWork project.
 
@@ -38,6 +39,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://chat-app-vsdj.onrender.com",
 ]
 
+# Allow pages from this same site to load inside an iframe.
+X_FRAME_OPTIONS = "SAMEORIGIN"
 
 # Application definition
 
@@ -92,8 +95,6 @@ ASGI_APPLICATION = 'newWork.asgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-import dj_database_url
-
 DATABASES = {
     "default": dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
@@ -143,7 +144,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 CHANNEL_LAYERS = {
-    "default":{
+    "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
     }
 }

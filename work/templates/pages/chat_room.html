@@ -1,30 +1,54 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="{% static 'css/pages/chat-room.css' %}">
     <link rel="stylesheet" href="{% static 'css/boxicon/boxicons.min.css' %}">
+
     <script>
-        window.currentUser = "{{ request.user.username }}";
+        window.currentUser = "{{ request.user.username|escapejs }}";
         window.currentUserId = "{{ request.user.id }}";
         const conversationId = "{{ conversation.id }}";
     </script>
+
     <script src="{% static 'js/pages/chat-room.js' %}" defer></script>
+
     <title>Chat Room</title>
 </head>
+
 <body>
     <div class="chat-room">
-        <header>
-            <a href="{% url 'home' %}"><i class="bx bx-left-arrow-alt"></i></a>
-            <h2>
-                {% if other_user.profile.avatar %}
-                    <img src="{{ other_user.profile.avatar.url }}" alt="">
-                {% else %}
-                    <img src="{% static 'images/default.jpg' %}" alt="">
-                {% endif %}
-                {{ other_user.username }}
+
+        <header class="chat-header">
+            <a
+                href="{% url 'home' %}"
+                id="chat-back-button"
+                class="back-button"
+                aria-label="Back"
+                title="Back"
+            >
+                <i class="bx bx-left-arrow-alt"></i>
+            </a>
+
+            <h2 class="chat-user-heading">
+                <span class="chat-avatar">
+                    {% if other_user.profile.avatar %}
+                        <img src="{{ other_user.profile.avatar.url }}"
+                             alt="{{ other_user.username }}">
+                    {% else %}
+                        <img src="{% static 'images/default.jpg' %}"
+                             alt="Default profile picture">
+                    {% endif %}
+                </span>
+
+                <span class="chat-user-details">
+                    <span class="chat-username">{{ other_user.username }}</span>
+                    <span class="chat-subtitle">Private conversation</span>
+                </span>
             </h2>
         </header>
 
@@ -34,10 +58,13 @@
                     <div class="chat">
                         {% if message.sender == request.user %}
                             <div class="user">
-                                <strong>You <br></strong>
+                                <strong>You</strong>
+
                                 <p class="message">{{ message.text }}</p>
+
                                 <small class="message-time">
                                     {{ message.created_at|date:"H:i" }}
+
                                     <small
                                         class="message-receipt"
                                         data-receipt-for="{{ message.id }}"
@@ -45,35 +72,87 @@
                                         title="{% if message.is_read %}Read{% elif message.delivered_at %}Delivered{% else %}Sent{% endif %}"
                                     >{% if message.is_read or message.delivered_at %}✓✓{% else %}✓{% endif %}</small>
                                 </small>
-                                
                             </div>
                         {% else %}
                             <div class="other_user">
-                                <strong>{{ message.sender.username }} <br></strong>
+                                <strong>{{ message.sender.username }}</strong>
+
                                 <p class="message">{{ message.text }}</p>
-                                <small>{{ message.created_at|date:"H:i" }}</small>
+
+                                <small class="message-time">
+                                    {{ message.created_at|date:"H:i" }}
+                                </small>
                             </div>
                         {% endif %}
                     </div>
                 {% empty %}
-                    <p>No messages yet.</p>
+                    <div class="empty-chat">
+                        <i class="bx bx-message-rounded-dots"></i>
+                        <p>No messages yet.</p>
+                        <span>Send a message to start the conversation.</span>
+                    </div>
                 {% endfor %}
             </div>
         </div>
 
-        <div id="typing-indicator" class="typing-indicator">
+        <div id="typing-indicator" class="typing-indicator" aria-label="Typing">
             <span class="bounce1"></span>
             <span class="bounce2"></span>
             <span class="bounce3"></span>
         </div>
 
-        <footer id="footer">
+        <footer id="footer" class="chat-footer">
             <form id="message-form">
                 {% csrf_token %}
-                <textarea name="message" placeholder="Message...." id="message-input" required></textarea>
-                <button type="submit"><i class="bx bxs-send"></i></button>
+
+                <textarea
+                    name="message"
+                    placeholder="Write a message..."
+                    id="message-input"
+                    rows="1"
+                    required
+                    aria-label="Write a message"
+                ></textarea>
+
+                <button type="submit" aria-label="Send message" title="Send message">
+                    <i class="bx bxs-send"></i>
+                </button>
             </form>
         </footer>
     </div>
+
+    <script>
+        (function () {
+            const backButton = document.getElementById("chat-back-button");
+
+            if (!backButton) {
+                return;
+            }
+
+            backButton.addEventListener("click", function (event) {
+                /*
+                 * If the chat is inside the desktop iframe, restore
+                 * the welcome panel instead of navigating Home.
+                 */
+                if (window.parent === window) {
+                    return;
+                }
+
+                try {
+                    if (
+                        typeof window.parent.closeActiveChatPanel === "function"
+                    ) {
+                        event.preventDefault();
+                        window.parent.closeActiveChatPanel();
+                    }
+                } catch (error) {
+                    /*
+                     * If the parent cannot be accessed, allow the
+                     * normal Home link to work as a fallback.
+                     */
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
