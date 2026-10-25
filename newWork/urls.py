@@ -1,31 +1,71 @@
+
 """
 URL configuration for newWork project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from work.api_views import (
+    HealthCheckView,
+    CurrentUserProfileView,
+    MobileLoginView,
+    MobileLogoutView,
+    ConversationListView,
+    ConversationMessageHistoryView,
+    SendMessageView,
+)
+
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("", include("work.urls"))
+    path("admin/", admin.site.urls),
+
+    # Version 1 API
+    path(
+        "api/v1/health/",
+        HealthCheckView.as_view(),
+        name="api_health",
+    ),
+    path(
+        "api/v1/auth/login/",
+        MobileLoginView.as_view(),
+        name="api_login",
+    ),
+    path(
+        "api/v1/auth/logout/",
+        MobileLogoutView.as_view(),
+        name="api_logout",
+    ),
+    path(
+        "api/v1/me/",
+        CurrentUserProfileView.as_view(),
+        name="api_current_user",
+    ),
+    path(
+        "api/v1/conversations/",
+        ConversationListView.as_view(),
+        name="api_conversations",
+    ),
+    path(
+        "api/v1/conversations/<int:conversation_id>/messages/",
+        ConversationMessageHistoryView.as_view(),
+        name="api_conversation_messages",
+    ),
+    path(
+        "api/v1/conversations/<int:conversation_id>/messages/send/",
+        SendMessageView.as_view(),
+        name="api_send_message",
+    ),
+
+    # Existing website routes
+    path("", include("work.urls")),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(
-        settings.MEDIA_URL, 
-        document_root = settings.MEDIA_ROOT
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT,
     )

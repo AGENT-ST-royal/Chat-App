@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'work',
     'corsheaders',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -170,3 +172,11 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+REST_FRAMEWORK = {
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "5/minute",
+    },
+}
+
+
